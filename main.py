@@ -1,13 +1,39 @@
-import tkinter as tk
+from functions import *
+import os
+import shutil
 
-from numpy import column_stack
-import PyPDF2
-from PIL import Image, ImageTk
+#test if data :
+appdata_path=os.getenv('APPDATA')+"\\f1-python-data"+"\\"
+if not os.path.exists(appdata_path):
+    os.mkdir(appdata_path)
 
-root=tk.Tk()
-canva = tk.Canvas(root, width=500, height=700)
-canva.grid(columnspan=3)
+if not os.path.exists(appdata_path+"saves"):
+    os.mkdir(appdata_path+"saves")
 
-logo=Image.open("logo.png")
+if not os.path.exists(appdata_path+"pilots.json"):
+    print("No data found, creating new one")
+    create_pilot_dict(appdata_path+"pilots.json")
 
-root.mainloop()
+if not os.path.exists(appdata_path+"full_pilot_list.json"):
+    print("No data found, creating new one")
+    copy_full_pilots_list(appdata_path+"full_pilot_list.json")
+
+
+
+#Menu page
+while True:
+    clear()
+    enchanced_print("Welcome to F1-Python-Data\nSelect a page below to continue:\n\n1. Enter predictions\n2. View predictions\n3. View predictions results\n4. View full pilot list\n0. Exit")
+    match ask_menu_question():
+        case "1":
+            clear()
+            predicts=make_predics(appdata_path+"pilots.json")
+            enchanced_print("Enter predictions file name :")
+            name=input(">>>")
+            save_predictions(name, predicts,appdata_path)
+            exit()
+        case "2":
+            clear()
+            enchanced_print("Enter predictions name file :")
+            name=input(">>>")
+            load_predictions(name,appdata_path)
