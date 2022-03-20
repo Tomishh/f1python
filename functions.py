@@ -9,7 +9,7 @@ from numpy import full
 def make_predics(pilots_json):
     pilots=json.load(open(pilots_json))
     predict=[]
-    for i in range(1):
+    for i in range(19):
         choice_valide=False
         while choice_valide==False:
             choice=input(f"Pilot in {i+1} place : ")
@@ -33,7 +33,7 @@ def copy_full_pilots_list(destination):
     shutil.copyfile("./source/full_pilot_list.json",destination)
 
 def enchanced_print(string):
-    print("\n------------------------------------------------------\n"+string+"\n------------------------------------------------------\n")
+    print("\n------------------------------------------------------\n\n"+string+"\n\n------------------------------------------------------\n")
 
 
 def clear():
@@ -53,10 +53,12 @@ def load_predictions(name,path):
     f = open(path+"/saves/"+name+".json", "r")
     data = json.load(f)
     full_data= get_full_data(path+"/full_pilot_list.json")
+    orderDriver=[]
     for alias in data:
         detail_data=get_pilot_detail_data(alias,full_data)
-        print(detail_data)
-        input("Press enter to continue")
+        orderDriver.append(detail_data)
+    grid_print(orderDriver,name)
+    input("\n------------------------------------------------------\n\nPress any key to continue...")
 
 def get_full_data(path):
     f = open(path,"r")
@@ -73,4 +75,30 @@ def get_pilot_detail_data(alias,full_data):
             detail_data["number"]=i['infos'][0]["number"]
     return detail_data
 
+def check_file_validity(path):
+    if os.path.exists(path):
+        return True
+    else:
+        return False
 
+def grid_print(data,savename):
+    pos=1
+    clear()
+    enchanced_print(f"Predictions results of '{savename}' : ")
+    for i in data:
+        alias=f" {i['alias']} |"
+        if len(i['name'])<= 15:
+            name=f"\t{i['name']}\t\t|"
+        else :
+            name=f"\t{i['name']}\t|"
+        if len(i['team'])< 16:
+            team=f"\t{i['team']}\t\t|"
+        else:
+            team=f"\t{i['team']}\t|"
+        number=f"\t{i['number']}\t|"
+        if pos < 10:
+            pos_print=f" {pos}. |"
+        else:
+            pos_print=f"{pos}. |"
+        print(f"{pos_print}{alias}{name}{number}{team}")
+        pos+=1

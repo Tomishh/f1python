@@ -44,7 +44,7 @@
             "infos": [{
                 "number": "4",
                 "name": "Lando Norris",
-                "team": "McLaren",
+                "team": "McLaren F1 Team",
                 "flag": "🇬🇧"
 
             }]
@@ -54,7 +54,7 @@
             "infos": [{
                 "number": "3",
                 "name": "Daniel Ricciardo",
-                "team": "McLaren",
+                "team": "McLaren F1 Team",
                 "flag": "🇦🇺"
 
             }]
@@ -174,7 +174,7 @@
             "infos": [{
                 "number": "24",
                 "name": "Guanyu Zhou",
-                "team": "24",
+                "team": "Alpha Romeo F1 Team",
                 "flag": "🇨🇳"
 
             }]
@@ -184,7 +184,7 @@
             "infos": [{
                 "number": "77",
                 "name": "Valtteri Bottas",
-                "team": "ALpha Romeo F1 Team",
+                "team": "Alpha Romeo F1 Team",
                 "flag": "🇫🇮"
 
             }]
